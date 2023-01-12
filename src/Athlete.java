@@ -4,7 +4,7 @@ public class Athlete extends Person
 
     public Athlete(String firstName, String lastName, String phoneNumber, String theSport)
     {
-        super(firstName, lastName, phoneNumber)
+        super(firstName, lastName, phoneNumber);
         sport = theSport;
     }
 

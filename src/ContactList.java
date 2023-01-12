@@ -8,13 +8,17 @@
  * @author: Ms. Namasivayam & Mr. Blick
  * @version: 2022-2023
  */
-
+import java.util.ArrayList;
+import java.util.Scanner;
 public class ContactList
 {
     // TODO: Create your array contacts
-
+    private ArrayList<Person> contacts;
     // TODO: Write a Constructor
-
+    public ContactList()
+    {
+        contacts = new ArrayList<Person>();
+    }
     public void printMenuOptions() {
         System.out.println("Menu: ");
         System.out.println("1. Add Contact");
@@ -32,8 +36,37 @@ public class ContactList
      * Asks user for input to create and add a new Person
      * to the contact list
      */
-    public void addContact() {
+    public void addContact()
+    {
         // TODO: Complete the addContact method
+        Scanner input = new Scanner(System.in);
+        System.out.println("Select a type of contact to add:");
+        System.out.println("1. Student");
+        System.out.println("2. Athlete");
+        System.out.println("Please fill in the following information");
+        System.out.println("First name:");
+        String fname = input.nextLine();
+        System.out.println("last name");
+        String lname = input.nextLine();
+        System.out.println("Phone number");
+        String pn = input.nextLine();
+        if (input.nextInt() == 1)
+        {
+            Student s;
+            input.nextLine();
+            int grade = input.nextInt();
+            input.nextLine();
+            s = new Student(fname, lname, pn, grade);
+            contacts.add(s);
+        }
+        else
+        {
+            Athlete a;
+            input.nextLine();
+            String sport = input.nextLine();
+            a = new Athlete(fname, lname, pn, sport);
+            contacts.add(a);
+        }
     }
 
     /**
@@ -41,6 +74,7 @@ public class ContactList
      */
     public void printContacts() {
         // TODO: Complete the printContacts method
+        //for (Person)
     }
 
     /**
