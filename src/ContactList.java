@@ -292,7 +292,11 @@ public class ContactList
                     searchByPhoneNumber(pn);
                 }
             }
+            System.out.println("Please pick from the following menu options");
+            printMenuOptions();
+            choice = input.nextInt();
         }
+        // If the user wants to exit
 
         // TODO: Complete the run method
     }
