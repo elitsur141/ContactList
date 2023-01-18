@@ -43,17 +43,19 @@ public class ContactList
         System.out.println("Select a type of contact to add:");
         System.out.println("1. Student");
         System.out.println("2. Athlete");
+        int choice = input.nextInt();
+        input.nextLine();
         System.out.println("Please fill in the following information");
         System.out.println("First name:");
         String fname = input.nextLine();
-        System.out.println("last name");
+        System.out.println("Last name:");
         String lname = input.nextLine();
-        System.out.println("Phone number");
+        System.out.println("Phone number:");
         String pn = input.nextLine();
-        if (input.nextInt() == 1)
+        if (choice == 1)
         {
             Student s;
-            input.nextLine();
+            System.out.println("Grade:");
             int grade = input.nextInt();
             input.nextLine();
             s = new Student(fname, lname, pn, grade);
@@ -62,7 +64,7 @@ public class ContactList
         else
         {
             Athlete a;
-            input.nextLine();
+            System.out.println("Sport:");
             String sport = input.nextLine();
             a = new Athlete(fname, lname, pn, sport);
             contacts.add(a);
@@ -74,7 +76,10 @@ public class ContactList
      */
     public void printContacts() {
         // TODO: Complete the printContacts method
-        //for (Person)
+        for (Person p : contacts)
+        {
+            System.out.println(p);
+        }
     }
 
     /**
@@ -84,19 +89,119 @@ public class ContactList
      */
     public void sort(int sortBy) {
         // TODO: Complete the sort method
+        // Sort by first name
+        if (sortBy == 0)
+        {
+            for (int i = 0; i < contacts.size() - 1; i++)
+            {
+                for (int j = 0; j < contacts.size() - 1 - i; j++)
+                {
+                    Person current = contacts.get(i);
+                    Person next = contacts.get(i + 1);
+                    // If the people's first names are out of order
+                    if (current.getFirstName().compareTo(next.getFirstName()) == 1)
+                    {
+                        // Swap the two people
+                        Person p = current;
+                        current = next;
+                        next = p;
+                    }
+                }
+            }
+        }
+        // Sort by last name
+        else if (sortBy == 1)
+        {
+            for (int i = 0; i < contacts.size() - 1; i++)
+            {
+                for (int j = 0; j < contacts.size() - 1 - i; j++)
+                {
+                    Person current = contacts.get(i);
+                    Person next = contacts.get(i + 1);
+                    // If the people's last names are out of order
+                    if (current.getLastName().compareTo(next.getLastName()) == 1)
+                    {
+                        // Swap the two people
+                        Person p = current;
+                        current = next;
+                        next = p;
+                    }
+                }
+            }
+        }
+        // Sort by phone number
+        else
+        {
+            for (int i = 0; i < contacts.size() - 1; i++)
+            {
+                for (int j = 0; j < contacts.size() - 1 - i; j++)
+                {
+                    Person current = contacts.get(i);
+                    Person next = contacts.get(i + 1);
+                    // If the people's phone numbers are out of order
+                    if (current.getPhoneNumber().compareTo(next.getPhoneNumber()) == 1)
+                    {
+                        // Swap the two people
+                        Person p = current;
+                        current = next;
+                        next = p;
+                    }
+                }
+            }
+        }
     }
 
     // TODO: Write searchByFirstName
-
+    public Person searchByFirstName(String fName)
+    {
+        for (Person person : contacts)
+        {
+            // If the first name is found
+            if (person.getFirstName().equals(fName))
+            {
+                return person;
+            }
+        }
+        return null;
+    }
     // TODO: Write searchByLastName
-
+    public Person searchByLastName(String lName)
+    {
+        for (Person person : contacts)
+        {
+            // If the last name is found
+            if (person.getLastName().equals(lName))
+            {
+                return person;
+            }
+        }
+        return null;
+    }
     // TODO: Write searchByPhoneNumber
-
+    public Person searchByPhoneNumber(String pn)
+    {
+        for (Person person : contacts)
+        {
+            // If the phone number is found
+            if (person.getPhoneNumber().equals(pn))
+            {
+                return person;
+            }
+        }
+        return null;
+    }
     /**
      * Lists just the Student objects in the Contact List
      */
     public void listStudents() {
         // TODO: Complete the listStudents method
+        for (Person p : contacts)
+        {
+            if (p instanceof Student)
+            {
+                System.out.println(p);
+            }
+        }
     }
 
     /**
@@ -104,9 +209,90 @@ public class ContactList
      * until the user exits
      */
     public void run() {
+        Scanner input = new Scanner(System.in);
         System.out.println("Welcome to your Contacts List");
         System.out.println("Please pick from the following menu options");
         printMenuOptions();
+        int choice = input.nextInt();
+        while (choice != 0)
+        {
+            // Add a contact
+            if (choice == 1)
+            {
+                addContact();
+            }
+            // Sort by first name
+            else if (choice == 2)
+            {
+                sort(0);
+            }
+            // Sort by last name
+            else if (choice == 3)
+            {
+                sort(1);
+            }
+            // Sort by phone number
+            else if (choice == 4)
+            {
+                sort(2);
+            }
+            // List all Students
+            else if (choice == 5)
+            {
+                listStudents();
+            }
+            // Search by first name
+            else if (choice == 6)
+            {
+                Scanner theName = new Scanner(System.in);
+                System.out.println("Enter a name:");
+                String fname = theName.nextLine();
+                // If the name is not in the list
+                if (searchByFirstName(fname) == null)
+                {
+                    System.out.println(fname + " is not in the list.");
+                }
+                // Else return the person's info
+                else
+                {
+                    searchByFirstName(fname);
+                }
+            }
+            // Search by last name
+            else if (choice == 7)
+            {
+                Scanner theName = new Scanner(System.in);
+                System.out.println("Enter a name:");
+                String lname = theName.nextLine();
+                // If the last name is not in the list
+                if (searchByFirstName(lname) == null)
+                {
+                    System.out.println(lname + " is not in the list.");
+                }
+                // Else return the person's info
+                else
+                {
+                    searchByLastName(lname);
+                }
+            }
+            // Search by phone number
+            else if (choice == 8)
+            {
+                Scanner theNum = new Scanner(System.in);
+                System.out.println("Enter a phone number:");
+                String pn = theNum.nextLine();
+                // If the phone number is not in the list
+                if (searchByFirstName(pn) == null)
+                {
+                    System.out.println(pn + " is not in the list.");
+                }
+                // Else return the person's info
+                else
+                {
+                    searchByPhoneNumber(pn);
+                }
+            }
+        }
 
         // TODO: Complete the run method
     }
