@@ -99,12 +99,11 @@ public class ContactList
                     Person current = contacts.get(i);
                     Person next = contacts.get(i + 1);
                     // If the people's first names are out of order
-                    if (current.getFirstName().compareTo(next.getFirstName()) == 1)
+                    if (current.getFirstName().compareTo(next.getFirstName()) > 0)
                     {
                         // Swap the two people
-                        Person p = current;
-                        current = next;
-                        next = p;
+                        contacts.set(i, next);
+                        contacts.set(i + 1, current);
                     }
                 }
             }
@@ -119,12 +118,11 @@ public class ContactList
                     Person current = contacts.get(i);
                     Person next = contacts.get(i + 1);
                     // If the people's last names are out of order
-                    if (current.getLastName().compareTo(next.getLastName()) == 1)
+                    if (current.getLastName().compareTo(next.getLastName()) > 0)
                     {
                         // Swap the two people
-                        Person p = current;
-                        current = next;
-                        next = p;
+                        contacts.set(i, next);
+                        contacts.set(i + 1, current);
                     }
                 }
             }
@@ -139,12 +137,11 @@ public class ContactList
                     Person current = contacts.get(i);
                     Person next = contacts.get(i + 1);
                     // If the people's phone numbers are out of order
-                    if (current.getPhoneNumber().compareTo(next.getPhoneNumber()) == 1)
+                    if (current.getPhoneNumber().compareTo(next.getPhoneNumber()) > 0)
                     {
                         // Swap the two people
-                        Person p = current;
-                        current = next;
-                        next = p;
+                        contacts.set(i, next);
+                        contacts.set(i + 1, current);
                     }
                 }
             }
@@ -225,16 +222,19 @@ public class ContactList
             else if (choice == 2)
             {
                 sort(0);
+                printContacts();
             }
             // Sort by last name
             else if (choice == 3)
             {
                 sort(1);
+                printContacts();
             }
             // Sort by phone number
             else if (choice == 4)
             {
                 sort(2);
+                printContacts();
             }
             // List all Students
             else if (choice == 5)
@@ -248,14 +248,15 @@ public class ContactList
                 System.out.println("Enter a name:");
                 String fname = theName.nextLine();
                 // If the name is not in the list
-                if (searchByFirstName(fname) == null)
+                Person p = searchByFirstName(fname);
+                if (p == null)
                 {
                     System.out.println(fname + " is not in the list.");
                 }
                 // Else return the person's info
                 else
                 {
-                    searchByFirstName(fname);
+                    System.out.println(p);
                 }
             }
             // Search by last name
@@ -292,12 +293,11 @@ public class ContactList
                     searchByPhoneNumber(pn);
                 }
             }
+            // If the user wants to exit
             System.out.println("Please pick from the following menu options");
             printMenuOptions();
             choice = input.nextInt();
         }
-        // If the user wants to exit
-
         // TODO: Complete the run method
     }
 
