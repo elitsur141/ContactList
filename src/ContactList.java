@@ -266,14 +266,15 @@ public class ContactList
                 System.out.println("Enter a name:");
                 String lname = theName.nextLine();
                 // If the last name is not in the list
-                if (searchByFirstName(lname) == null)
+                Person p = searchByLastName(lname);
+                if (p == null)
                 {
                     System.out.println(lname + " is not in the list.");
                 }
                 // Else return the person's info
                 else
                 {
-                    searchByLastName(lname);
+                    System.out.println(p);
                 }
             }
             // Search by phone number
@@ -283,14 +284,15 @@ public class ContactList
                 System.out.println("Enter a phone number:");
                 String pn = theNum.nextLine();
                 // If the phone number is not in the list
-                if (searchByFirstName(pn) == null)
+                Person p = searchByPhoneNumber(pn);
+                if (p == null)
                 {
                     System.out.println(pn + " is not in the list.");
                 }
                 // Else return the person's info
                 else
                 {
-                    searchByPhoneNumber(pn);
+                    System.out.println(p);
                 }
             }
             // If the user wants to exit
